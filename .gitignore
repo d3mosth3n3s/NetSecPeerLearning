@@ -76,7 +76,4 @@ temp/
 *.sqlite
 *.sqlite3
 
-# Package manager lock files (optional - uncomment if needed)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
+.claude/
