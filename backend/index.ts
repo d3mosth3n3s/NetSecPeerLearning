@@ -4,8 +4,9 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { pool, closePool } from './config/database'
 //import { notFoundHandler, errorHandler } from './middleware/errorHandler'
-import goodFileUploadEndpoints from './endpoints/goodFileUpload'
-import badFileUploadEndpoints from './endpoints/badFileUpload'
+//import goodFileUploadEndpoints from './endpoints/goodFileUpload'
+//import badFileUploadEndpoints from './endpoints/badFileUpload'
+import vulnerabilitiesEndpoints from './endpoints/vulnerabilities'
 
 // Load environment variables
 dotenv.config()
@@ -39,8 +40,9 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 // API routes, this is an example of how they will be used
-app.use('/api', badFileUpload)
-app.use('/api', goodFileUpload)
+//app.use('/api', badFileUploadEndpoints)
+//app.use('/api', goodFileUploadEndpoints)
+app.use('/api', vulnerabilitiesEndpoints)
 
 // Server Startup
 const server = app.listen(port, () => {

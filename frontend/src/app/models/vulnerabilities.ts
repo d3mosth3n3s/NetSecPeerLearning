@@ -6,6 +6,11 @@ export interface vulnerability {
     link: string
 }
 
+export interface ApiResponse<T> {
+    success: boolean,
+    data: T
+}
+
 export const vulnerabilities: vulnerability[] = [
     {
         id: "template",
