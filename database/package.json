@@ -9,7 +9,7 @@
     "tables": "psql -U postgres -d netsecdb -f sql_scripts/create_tables.sql",
     "functions": "psql -U postgres -d netsecdb -f sql_scripts/create_functions.sql",
     "data": "psql -U postgres -d netsecdb -f sql_scripts/create_mock_data.sql",
-    "setup": "npm run database && npm run tables && npm run functions && npm run data",
+    "setup": "psql -U postgres -f sql_scripts/setup.sql",
     "reset": "npm run setup"
   },
   "keywords": [],
