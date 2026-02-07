@@ -1,0 +1,10 @@
+@media (min-width: 1200px) {
+  .col-xl-custom {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
+
+.container-fluid {
+  max-width: 1400px;
+}

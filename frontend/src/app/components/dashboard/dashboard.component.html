@@ -1,1 +1,18 @@
-<p>dashboard.component works!</p>
+<div class="container-fluid py-5">
+  <!-- Header Section -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-3">Common Vulnerabilities Playground</h1>
+    <p class="lead text-muted px-3">
+      A sandbox web-app that examplifies good and bad implementations of common website features that can be exploited
+    </p>
+  </div>
+
+  <!-- Vulnerability Cards Grid -->
+  <div class="row g-4 justify-content-center">
+    @for (vuln of vulnerabilities; track vuln.title) {
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-custom">
+        <app-vulnerability-card [vulnerability]="vuln"></app-vulnerability-card>
+      </div>
+    }
+  </div>
+</div>
