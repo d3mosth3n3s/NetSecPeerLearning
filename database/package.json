@@ -10,6 +10,7 @@
     "functions": "psql -U postgres -d netsecdb -f sql_scripts/create_functions.sql",
     "data": "psql -U postgres -d netsecdb -f sql_scripts/create_mock_data.sql",
     "setup": "psql -U postgres -f sql_scripts/setup.sql",
+    "setup:linux": "psql -h localhost -U postgres -f sql_scripts/setup.sql",
     "reset": "npm run setup"
   },
   "keywords": [],
