@@ -4,5 +4,4 @@ CREATE TABLE IF NOT EXISTS vulnerabilities (
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     link VARCHAR(500) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
