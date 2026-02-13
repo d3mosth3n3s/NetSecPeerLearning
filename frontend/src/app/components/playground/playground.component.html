@@ -9,6 +9,12 @@
             <!-- Add template-specific playground features -->
           </div>
         }
+        @case ('Improper-Neutralization-of-Input-During-Web-Page-Generation') {
+          <div>
+            <button type="button" class="btn btn-primary" (click)="getStoredValue()">Get User Inputted Value</button>
+            <p>{{savedValue$ | async}}</p>
+          </div>
+        }
         <!-- Add more vulnerability-specific playground content -->
         <!-- @case ('Improper-Neutralization-of-Special-Elements-used-in-an-SQL-Command') {
           <div>SQL Injection playground</div>
