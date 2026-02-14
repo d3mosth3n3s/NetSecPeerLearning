@@ -10,15 +10,8 @@ export class GoodImplementationService {
 
   constructor(private http: HttpClient) {}
 
-  public saveXSSValue(goodInput: string) {
-    return this.http.post(`${this.apiUrl}/xss/good`, { value: goodInput }).subscribe({
-      next: (response) => {
-        console.log('XSS value saved successfully:', response);
-      },
-      error: (error) => {
-        console.error('Error saving XSS value:', error);
-      }
-    });
+  public saveXSSValue(goodInput: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/xss/good`, { value: goodInput });
   }
 
   public getXSSValue(id: string): Observable<any> {

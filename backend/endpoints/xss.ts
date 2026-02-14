@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { pool } from '../config/database'
+import { validateStringInput } from '../utils/validation'
 
 const router = Router()
 
@@ -15,12 +16,28 @@ router.post('/xss/good', goodSaveXSSValue)
 async function goodSaveXSSValue(request: Request, response: Response, next: NextFunction) {
   try {
     const { value } = request.body
+
+    // Validate input before processing
+    const validation = validateStringInput(value, 'value')
+    if (!validation.valid) {
+      return response.status(400).json({
+        success: false,
+        message: validation.error
+      })
+    }
+
     const id = 'user-input' // Simple ID for this demo, that way each value is just replacing the old
-    
     const result = await pool.query(
       'SELECT * FROM save_xss_value($1, $2)',
       [id, value]
     )
+    
+    if (result.rows.length === 0) {
+      return response.status(500).json({
+        success: false,
+        message: 'Failed to save XSS value'
+      })
+    }
     
     response.json({
       success: true,
