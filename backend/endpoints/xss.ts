@@ -29,7 +29,7 @@ async function goodSaveXSSValue(request: Request, response: Response, next: Next
     const id = 'user-input' // Simple ID for this demo, that way each value is just replacing the old
     const result = await pool.query(
       'SELECT * FROM save_xss_value($1, $2)',
-      [id, value]
+      [id, validation.value]
     )
     
     if (result.rows.length === 0) {
