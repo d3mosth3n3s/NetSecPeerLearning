@@ -14,16 +14,26 @@ import { map } from 'rxjs/operators';
 })
 export class PlaygroundComponent {
   @Input() vulnerability?: vulnerability
+  @Input() isGoodImplementation: boolean = true
   public savedValue$?: Observable<string>
+  public badSavedValue: string = ''
 
   constructor(
     private goodService: GoodImplementationService,
     private badService: BadImplementationService
   ) {}
 
-  getStoredValue() {
-    this.savedValue$ = this.goodService.getXSSValue('user-input').pipe(
+  getGoodXSSValue() {
+    this.savedValue$ = this.goodService.getGoodXSSValue('user-input').pipe(
       map(response => response.data.value)
     )
+  }
+
+  getBadXSSValue() {
+    this.badService.getBadXSSValue('user-input-bad').subscribe({
+      next: (response) => {
+        this.badSavedValue = response.data.value
+      }
+    })
   }
 }
