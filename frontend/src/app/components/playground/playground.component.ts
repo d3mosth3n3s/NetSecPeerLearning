@@ -16,7 +16,7 @@ export class PlaygroundComponent {
   @Input() vulnerability?: vulnerability
   @Input() isGoodImplementation: boolean = true
   public savedValue$?: Observable<string>
-  public badSavedValue: string = ''
+  public badSavedValue$?: Observable<string>
 
   constructor(
     private goodService: GoodImplementationService,
@@ -30,10 +30,8 @@ export class PlaygroundComponent {
   }
 
   getBadXSSValue() {
-    this.badService.getBadXSSValue('user-input-bad').subscribe({
-      next: (response) => {
-        this.badSavedValue = response.data.value
-      }
-    })
+    this.badSavedValue$ = this.badService.getBadXSSValue('user-input-bad').pipe(
+      map(response => response.data.value)
+    )
   }
 }

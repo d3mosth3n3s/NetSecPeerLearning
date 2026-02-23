@@ -16,7 +16,7 @@
               <p>{{savedValue$ | async}}</p>
             } @else {
               <button type="button" class="btn btn-danger" (click)="getBadXSSValue()">Get User Inputted Value</button>
-              <div [innerHTML]="badSavedValue"></div>
+              <div [innerHTML]="badSavedValue$ | async"></div>
             }
           </div>
         }
