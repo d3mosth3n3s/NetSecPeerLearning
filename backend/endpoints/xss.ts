@@ -8,11 +8,11 @@ const router = Router()
 router.get('/xss/good/:id', goodGetXSSValue)
 router.post('/xss/good', goodSaveXSSValue)
 
-// Bad implementation routes (vulnerable - no validation!)
+// Bad implementation routes (vulnerable)
 router.get('/xss/bad/:id', badGetXSSValue)
 router.post('/xss/bad', badSaveXSSValue)
 
-// Good implementation - uses parameterized queries
+// Good implementation
 async function goodSaveXSSValue(request: Request, response: Response, next: NextFunction) {
   try {
     const { value } = request.body
@@ -87,7 +87,7 @@ async function goodGetXSSValue(request: Request, response: Response, next: NextF
   }
 }
 
-// Bad implementation - no validation, raw input saved directly
+// Bad implementation
 async function badSaveXSSValue(request: Request, response: Response, next: NextFunction) {
   try {
     const { value } = request.body
