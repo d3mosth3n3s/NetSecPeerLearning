@@ -11,8 +11,13 @@
         }
         @case ('Improper-Neutralization-of-Input-During-Web-Page-Generation') {
           <div>
-            <button type="button" class="btn btn-primary" (click)="getStoredValue()">Get User Inputted Value</button>
-            <p>{{savedValue$ | async}}</p>
+            @if (isGoodImplementation) {
+              <button type="button" class="btn btn-primary" (click)="getGoodXSSValue()">Get User Inputted Value</button>
+              <p>{{savedValue$ | async}}</p>
+            } @else {
+              <button type="button" class="btn btn-danger" (click)="getBadXSSValue()">Get User Inputted Value</button>
+              <div [innerHTML]="badSavedValue$ | async"></div>
+            }
           </div>
         }
         <!-- Add more vulnerability-specific playground content -->
