@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { vulnerability } from '../../models/vulnerabilities';
 import { GoodImplementationService } from '../../services/good-implementation.service';
 import { BadImplementationService } from '../../services/bad-implementation.service';
@@ -16,11 +17,12 @@ export class PlaygroundComponent {
   @Input() vulnerability?: vulnerability
   @Input() isGoodImplementation: boolean = true
   public savedValue$?: Observable<string>
-  public badSavedValue$?: Observable<string>
+  public badSavedValue$?: Observable<SafeHtml>
 
   constructor(
     private goodService: GoodImplementationService,
-    private badService: BadImplementationService
+    private badService: BadImplementationService,
+    private sanitizer: DomSanitizer
   ) {}
 
   getGoodXSSValue() {
@@ -31,7 +33,7 @@ export class PlaygroundComponent {
 
   getBadXSSValue() {
     this.badSavedValue$ = this.badService.getBadXSSValue('user-input-bad').pipe(
-      map(response => response.data.value)
+      map(response => this.sanitizer.bypassSecurityTrustHtml(response.data.value))
     )
   }
 }
