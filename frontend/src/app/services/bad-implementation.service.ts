@@ -17,4 +17,8 @@ export class BadImplementationService {
   public getBadXSSValue(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/xss/bad/${id}`);
   }
+
+  public getBadSQLValue(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sql/bad`, { username, password });
+  }
 }

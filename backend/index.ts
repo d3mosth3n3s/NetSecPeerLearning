@@ -8,6 +8,7 @@ import { pool, closePool } from './config/database'
 //import badFileUploadEndpoints from './endpoints/badFileUpload'
 import vulnerabilitiesEndpoints from './endpoints/vulnerabilities'
 import xssEndpoints from './endpoints/xss'
+import sqlEndpoints from './endpoints/sql'
 
 // Load environment variables
 dotenv.config()
@@ -45,6 +46,7 @@ app.get('/', (req: Request, res: Response) => {
 //app.use('/api', goodFileUploadEndpoints)
 app.use('/api', vulnerabilitiesEndpoints)
 app.use('/api', xssEndpoints)
+app.use('/api', sqlEndpoints)
 
 // Server Startup
 const server = app.listen(port, () => {
