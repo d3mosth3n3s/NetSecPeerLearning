@@ -9,6 +9,17 @@
             <!-- Add template-specific playground features -->
           </div>
         }
+        @case ('Improper-Neutralization-of-Input-During-Web-Page-Generation') {
+          <div>
+            @if (isGoodImplementation) {
+              <button type="button" class="btn btn-primary" (click)="getGoodXSSValue()">Get User Inputted Value</button>
+              <p>{{savedValue$ | async}}</p>
+            } @else {
+              <button type="button" class="btn btn-danger" (click)="getBadXSSValue()">Get User Inputted Value</button>
+              <div [innerHTML]="badSavedValue$ | async"></div>
+            }
+          </div>
+        }
         <!-- Add more vulnerability-specific playground content -->
         <!-- @case ('Improper-Neutralization-of-Special-Elements-used-in-an-SQL-Command') {
           <div>SQL Injection playground</div>
