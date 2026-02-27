@@ -20,10 +20,45 @@
             }
           </div>
         }
-        <!-- Add more vulnerability-specific playground content -->
-        <!-- @case ('Improper-Neutralization-of-Special-Elements-used-in-an-SQL-Command') {
-          <div>SQL Injection playground</div>
-        } -->
+        @case ('Improper-Neutralization-of-Special-Elements-used-in-an-SQL-Command') {
+          <div>
+            @if (isGoodImplementation) {
+              <div class="alert alert-success mb-3">
+                <h6 class="fw-bold mb-2">Why this implementation is secure:</h6>
+                <p class="mb-2">This login form uses <strong>parameterized queries</strong> (also called prepared statements). Instead of inserting your input directly into the SQL string, it passes your input as a separate parameter that the database treats as pure data and never as executable SQL.</p>
+                <p class="mb-2">For example, if you type <code>' OR '1'='1</code> as the username, the database will literally search for a user whose username is <code>' OR '1'='1</code> rather than interpreting it as SQL logic. No such user exists, so the login fails.</p>
+                <p class="mb-2">The query used is: <code>SELECT * FROM users WHERE username = $1 AND password = $2</code> where <code>$1</code> and <code>$2</code> are placeholders filled in safely by the database driver.</p>
+                <p class="mb-0">Loaded valid usernames and passwords are "john/john" and "admin/password"</p>
+              </div>
+            } @else {
+              <div class="alert alert-warning mb-3">
+                <h6 class="fw-bold mb-2">How to perform the injection:</h6>
+                <p class="mb-2">This login form is vulnerable because it directly inserts your input into the SQL query without sanitization. You can exploit this to log in as any user without knowing their password.</p>
+                <p class="mb-2">Click the help icon (❓) on the SQL Injection card to see copyable exploit examples.</p>
+                <p class="mb-2">For example, type <code>admin</code> in the username field, then type <code>' OR '1'='1</code> in the password field. This closes the password string early and appends a condition that is always true, bypassing the password check entirely.</p>
+                <p class="mb-2">The resulting query becomes: <code>SELECT * FROM users WHERE username = 'admin' AND password = '' OR '1'='1'</code> which always returns a result.</p>
+                <p class="mb-0">Loaded valid usernames and passwords are "john/john" and "admin/password"</p>
+              </div>
+            }
+            @if (isGoodImplementation) {
+              <button type="button" class="btn btn-primary" (click)="getGoodSQLValue()">Submit Login</button>
+            } @else {
+              <button type="button" class="btn btn-danger" (click)="getBadSQLValue()">Submit Login</button>
+            }
+            @if (sqlResult$ | async; as sqlResult) {
+              @if (sqlResult.success) {
+                <div class="mt-3 p-3 rounded border-start border-success border-4 bg-light">
+                  <p class="text-success fw-bold mb-1">✅ Login Successful</p>
+                  <p class="mb-0">Welcome, <strong>{{ sqlResult.data.user }}</strong></p>
+                </div>
+              } @else {
+                <div class="mt-3 p-3 rounded border-start border-danger border-4 bg-light">
+                  <p class="text-danger fw-bold mb-0">❌ Login Unsuccessful</p>
+                </div>
+              }
+            }
+          </div>
+        }
         <!-- @case ('Improper-Neutralization-of-Input-During-Web-Page-Generation') {
           <div>XSS playground</div>
         } -->

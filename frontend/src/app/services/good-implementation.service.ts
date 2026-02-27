@@ -17,5 +17,8 @@ export class GoodImplementationService {
   public getGoodXSSValue(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/xss/good/${id}`);
   }
+
+  public getGoodSQLValue(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sql/good`, { username, password });
+  }
 }
- 
