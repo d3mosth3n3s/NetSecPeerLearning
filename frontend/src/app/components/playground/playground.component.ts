@@ -20,7 +20,7 @@ export class PlaygroundComponent {
 
   public savedValue$?: Observable<string>
   public badSavedValue$?: Observable<SafeHtml>
-  public sqlResult: any = null
+  public sqlResult$?: Observable<any>
 
   constructor(
     private goodService: GoodImplementationService,
@@ -42,7 +42,7 @@ export class PlaygroundComponent {
   }
 
   getGoodSQLValue() {
-    this.vulnerabilityService.credentials$.pipe(
+    this.sqlResult$ = this.vulnerabilityService.credentials$.pipe(
       take(1),
       switchMap(creds => {
         if (creds) {
@@ -52,11 +52,11 @@ export class PlaygroundComponent {
         }
         return of(null)
       })
-    ).subscribe(result => this.sqlResult = result)
+    )
   }
 
   getBadSQLValue() {
-    this.vulnerabilityService.credentials$.pipe(
+    this.sqlResult$ = this.vulnerabilityService.credentials$.pipe(
       take(1),
       switchMap(creds => {
         if (creds) {
@@ -66,6 +66,6 @@ export class PlaygroundComponent {
         }
         return of(null)
       })
-    ).subscribe(result => this.sqlResult = result)
+    )
   }
 }

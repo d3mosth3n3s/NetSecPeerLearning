@@ -34,7 +34,8 @@
               <div class="alert alert-warning mb-3">
                 <h6 class="fw-bold mb-2">How to perform the injection:</h6>
                 <p class="mb-2">This login form is vulnerable because it directly inserts your input into the SQL query without sanitization. You can exploit this to log in as any user without knowing their password.</p>
-                <p class="mb-2">Type any valid username (e.g. <code>admin</code>) in the username field, then type <code>' OR '1'='1</code> in the password field. This closes the password string early and appends a condition that is always true, bypassing the password check entirely.</p>
+                <p class="mb-2">Click the help icon (❓) on the SQL Injection card to see copyable exploit examples.</p>
+                <p class="mb-2">For example, type <code>admin</code> in the username field, then type <code>' OR '1'='1</code> in the password field. This closes the password string early and appends a condition that is always true, bypassing the password check entirely.</p>
                 <p class="mb-2">The resulting query becomes: <code>SELECT * FROM users WHERE username = 'admin' AND password = '' OR '1'='1'</code> which always returns a result.</p>
                 <p class="mb-0">Loaded valid usernames and passwords are "john/john" and "admin/password"</p>
               </div>
@@ -44,7 +45,7 @@
             } @else {
               <button type="button" class="btn btn-danger" (click)="getBadSQLValue()">Submit Login</button>
             }
-            @if (sqlResult) {
+            @if (sqlResult$ | async; as sqlResult) {
               @if (sqlResult.success) {
                 <div class="mt-3 p-3 rounded border-start border-success border-4 bg-light">
                   <p class="text-success fw-bold mb-1">✅ Login Successful</p>
