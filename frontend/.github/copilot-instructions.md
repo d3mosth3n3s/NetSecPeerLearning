@@ -4,7 +4,7 @@
 - **Environment:**
     - Do not try to start the frontend or backend servers. Look for existing terminals where they might already be running to check for compiler errors.
     - **Do not guess** database ports or names. Check running terminals or configuration files first.
-    - **Database Connection:** The database name is `NetSecDB`, port is `5432`, user is `postgres`. Always use these values for `psql` commands.
+    - **Database Connection:** The database name is `netsecdb`, port is `5432`, user is `postgres`. Always use these values for `psql` commands.
 - **Active Terminal Monitoring:**
     - **CRITICAL:** After making ANY code changes, check active terminals for errors:
         - **Frontend Server terminal:** Check for Angular compilation errors, TypeScript errors, or runtime warnings.
