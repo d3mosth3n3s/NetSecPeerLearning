@@ -18,6 +18,16 @@ export class GoodImplementationService {
     return this.http.get(`${this.apiUrl}/xss/good/${id}`);
   }
 
+  public goodFileUploadCheck(fileInput: File): Observable<any> {
+    const formData = new FormData()
+    formData.append('file', fileInput)
+    return this.http.post(`${this.apiUrl}/ufu/good`, formData);
+  }
+
+  public goodGetFile(id: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ufu/good/${id}`, { responseType: 'blob' });
+  }
+
   public getGoodSQLValue(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/sql/good`, { username, password });
   }

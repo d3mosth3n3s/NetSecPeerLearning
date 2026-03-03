@@ -108,6 +108,13 @@
         <!-- @case ('Improper-Neutralization-of-Input-During-Web-Page-Generation') {
           <div>XSS playground</div>
         } -->
+        @case ('Unrestricted-File-Upload-With-Dangerous-Type') {
+          <div>
+            <button type="button" class="btn btn-primary" (click)="downloadFile()">
+              {{ isGoodImplementation ? 'Download Stored File (good)' : 'Download Stored File (bad)' }}
+            </button>
+          </div>
+        }
         @case ('Missing-Authorization') {
           <div>
             <button

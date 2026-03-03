@@ -10,6 +10,16 @@ export class BadImplementationService {
 
   constructor(private http: HttpClient) {}
 
+  public badFileUploadCheck(fileInput: File): Observable<any> {
+    const formData = new FormData()
+    formData.append('file', fileInput)
+    return this.http.post(`${this.apiUrl}/ufu/bad`, formData);
+  }
+
+  public badGetFile(id: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ufu/bad/${id}`, { responseType: 'blob' });
+  }
+
   public saveBadXSSValue(badInput: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/xss/bad`, { value: badInput });
   }

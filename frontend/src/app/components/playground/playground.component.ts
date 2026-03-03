@@ -37,13 +37,31 @@ export class PlaygroundComponent {
     )
   }
 
+  downloadFile() {
+    const id = 'user-input'
 
- getStoredValue2() {
+    const obs = this.isGoodImplementation
+      ? this.goodService.goodGetFile(id)
+      : this.badService.badGetFile(id)
+
+    obs.subscribe(
+      blob => {
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'downloaded'
+        a.click()
+        window.URL.revokeObjectURL(url)
+      },
+      err => console.error('Error downloading file', err)
+    )
+  }
+
+  getStoredValue2() {
     this.savedValue$ = this.goodService.getGoodXSSValue('user-input').pipe(
       map(response => response.data.value)
     )
   }
-  
 
   getBadXSSValue() {
     this.badSavedValue$ = this.badService.getBadXSSValue('user-input-bad').pipe(
