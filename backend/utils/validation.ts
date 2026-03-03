@@ -36,6 +36,20 @@ export function validateStringInput(
   return { valid: true, value: trimmed }
 }
 
+/**
+ * Tries to validate if a file input is a PDF file by checking the file's extension
+ * 
+ */
+
+export function badValidateFileInput(
+  fileInput: File,
+): { valid: true, file: File } | { valid: false, error: string } {
+  if (fileInput.name.endsWith('.pdf')) {
+    return { valid: true, file: fileInput }
+  }
+  return { valid: false, error: `The file, ${fileInput.name} is not in PDF format.` }
+}
+
 // Examples
 
 // export function parseId(value: unknown): number | null {

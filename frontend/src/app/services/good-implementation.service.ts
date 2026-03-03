@@ -18,4 +18,11 @@ export class GoodImplementationService {
     return this.http.get(`${this.apiUrl}/xss/good/${id}`);
   }
 }
+
+export class BadImplementationService {
+  private apiUrl = 'http://localhost:3000/api';
+
+  constructor(private http: HttpClient) {}
+  
+}
  
