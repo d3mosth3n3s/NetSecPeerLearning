@@ -25,39 +25,11 @@
           <div>XSS playground</div>
         } -->
         @case ('Missing-Authorization') {
-          <div class="blog-container">
-            <h3 class="mb-3">Blog Posts</h3>
-
-            <div class="card mb-3" *ngFor="let post of posts">
-              <div class="card-body">
-                <h5>User {{ post.userId }}'s Post</h5>
-
-                <!-- READ MODE -->
-                <p *ngIf="!canEdit(post)">
-                  {{ post.content }}
-                </p>
-
-                <!-- EDIT MODE -->
-                <textarea
-                  *ngIf="canEdit(post)"
-                  class="form-control mb-2"
-                  rows="4"
-                  [(ngModel)]="post.content"
-                ></textarea>
-
-                <button
-                  *ngIf="canEdit(post)"
-                  class="btn btn-sm btn-success"
-                  (click)="savePost(post)"
-                >
-                  Save
-                </button>
-
-                <span *ngIf="!canEdit(post)" class="text-muted small">
-                  Read-only (not your post)
-                </span>
-              </div>
-            </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="getStoredValue2()">
+              Get User Inputted Value
+            </button>
+            <p>{{ savedValue$ | async }}</p>
           </div>
         }
         @default {
