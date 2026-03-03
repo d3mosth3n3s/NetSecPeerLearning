@@ -49,3 +49,5 @@ try {
     })
   }
 }
+
+export default router

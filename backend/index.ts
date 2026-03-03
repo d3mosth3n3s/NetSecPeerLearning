@@ -4,8 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { pool, closePool } from './config/database'
 //import { notFoundHandler, errorHandler } from './middleware/errorHandler'
-//import goodFileUploadEndpoints from './endpoints/goodFileUpload'
-//import badFileUploadEndpoints from './endpoints/badFileUpload'
+import fileUploadEndpoints from './endpoints/unrestrictedFileUpload'
 import vulnerabilitiesEndpoints from './endpoints/vulnerabilities'
 import xssEndpoints from './endpoints/xss'
 
@@ -41,8 +40,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 // API routes, this is an example of how they will be used
-//app.use('/api', badFileUploadEndpoints)
-//app.use('/api', goodFileUploadEndpoints)
+app.use('/api', fileUploadEndpoints)
 app.use('/api', vulnerabilitiesEndpoints)
 app.use('/api', xssEndpoints)
 
