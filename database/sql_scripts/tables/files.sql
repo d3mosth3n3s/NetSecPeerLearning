@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS ufuvalues (
     id VARCHAR(255) PRIMARY KEY,
-    filename TEXT
+    filename TEXT,
     filedata BYTEA
 );
