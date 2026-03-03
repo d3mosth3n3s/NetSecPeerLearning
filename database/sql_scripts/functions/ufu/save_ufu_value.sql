@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION save_xss_value(
+CREATE OR REPLACE FUNCTION save_ufu_value(
     p_id VARCHAR(255),
-    p_filename TEXT
+    p_filename TEXT,
     p_filedata BYTEA
 )
 RETURNS TABLE (
@@ -9,11 +9,11 @@ RETURNS TABLE (
 ) AS $$
 BEGIN
     RETURN QUERY
-    INSERT INTO files (id, filename, filedata)
+    INSERT INTO ufuvalues (id, filename, filedata)
     VALUES (p_id, p_filename, p_filedata)
-    ON CONFLICT (id) 
+    ON CONFLICT (id)
     DO UPDATE SET filename = EXCLUDED.filename, filedata = EXCLUDED.filedata
-    RETURNING files.id, files.filename;
+    RETURNING ufuvalues.id, ufuvalues.filename;
 END;
 $$ LANGUAGE plpgsql;
  

@@ -15,5 +15,9 @@ export class BadImplementationService {
     formData.append('file', fileInput)
     return this.http.post(`${this.apiUrl}/ufu/bad`, formData);
   }
+
+  public badGetFile(id: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/ufu/bad/${id}`, { responseType: 'blob' });
+  }
 }
 

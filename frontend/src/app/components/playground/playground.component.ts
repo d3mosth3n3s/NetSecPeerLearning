@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class PlaygroundComponent {
   @Input() vulnerability?: vulnerability
+  @Input() isGoodImplementation: boolean = true
   public savedValue$?: Observable<string>
 
   constructor(
@@ -24,6 +25,26 @@ export class PlaygroundComponent {
   getStoredValue() {
     this.savedValue$ = this.goodService.getXSSValue('user-input').pipe(
       map(response => response.data.value)
+    )
+  }
+
+  downloadFile() {
+    const id = 'user-input'
+
+    const obs = this.isGoodImplementation
+      ? this.goodService.goodGetFile(id)
+      : this.badService.badGetFile(id)
+
+    obs.subscribe(
+      blob => {
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'downloaded'
+        a.click()
+        window.URL.revokeObjectURL(url)
+      },
+      err => console.error('Error downloading file', err)
     )
   }
 }

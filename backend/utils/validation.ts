@@ -41,14 +41,24 @@ export function validateStringInput(
  * 
  */
 
-export function badValidateFileInput(
-  fileInput: File,
-): { valid: true, file: File } | { valid: false, error: string } {
-  if (fileInput.name.endsWith('.pdf')) {
-    return { valid: true, file: fileInput }
+export function validateFileInput(
+  file: Express.Multer.File
+): { valid: true; file: Express.Multer.File } | { valid: false; error: string } {
+  const name = file.originalname.toLowerCase()
+  if (!name.endsWith('.pdf')) {
+    return { valid: false, error: `The file, ${file.originalname}, is not in PDF format.` }
   }
-  return { valid: false, error: `The file, ${fileInput.name} is not in PDF format.` }
+  return { valid: true, file }
 }
+
+// export function badValidateFileInput(
+//   fileInput: File,
+// ): { valid: true, file: File } | { valid: false, error: string } {
+//   if (fileInput.name.endsWith('.pdf')) {
+//     return { valid: true, file: fileInput }
+//   }
+//   return { valid: false, error: `The file, ${fileInput.name} is not in PDF format.` }
+// }
 
 // Examples
 
