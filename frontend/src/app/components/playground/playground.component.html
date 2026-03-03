@@ -110,10 +110,92 @@
         } -->
         @case ('Missing-Authorization') {
           <div>
-            <button type="button" class="btn btn-primary" (click)="getStoredValue2()">
-              Get User Inputted Value
+            <button
+              type="button"
+              class="btn"
+              [ngClass]="isGoodImplementation ? 'btn-success' : 'btn-danger'"
+              data-bs-toggle="modal"
+              data-bs-target="#missingAuthModal"
+            >
+              View Implementation Details
             </button>
-            <p>{{ savedValue$ | async }}</p>
+
+            <div
+              class="modal fade"
+              id="missingAuthModal"
+              tabindex="-1"
+              aria-labelledby="missingAuthModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div
+                    class="modal-header"
+                    [ngClass]="
+                      isGoodImplementation ? 'bg-success text-white' : 'bg-danger text-white'
+                    "
+                  >
+                    <h5 class="modal-title" id="missingAuthModalLabel">
+                      @if (isGoodImplementation) {
+                        Secure Authorization Implementation
+                      } @else {
+                        Broken Access Control (Vulnerable Implementation)
+                      }
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close btn-close-white"
+                      data-bs-dismiss="modal"
+                    ></button>
+                  </div>
+
+                  <div class="modal-body">
+                    @if (isGoodImplementation) {
+                      <div>
+                        <h6 class="fw-bold">Why this implementation is secure:</h6>
+                        <p>
+                          Users are only allowed to edit posts that belong to them. The system
+                          checks whether the logged-in user's ID matches the post owner's ID before
+                          allowing edits.
+                        </p>
+                        <p>
+                          Even if someone manipulates the frontend, proper authorization logic
+                          prevents editing another user's content.
+                        </p>
+                        <p class="mb-0">
+                          This enforces <strong>ownership validation</strong>, preventing
+                          unauthorized modifications.
+                        </p>
+                      </div>
+                    } @else {
+                      <div>
+                        <h6 class="fw-bold">How this implementation is vulnerable:</h6>
+                        <p>
+                          The application only checks whether a user is logged in. it does NOT
+                          verify ownership of the post.
+                        </p>
+                        <p>This means any authenticated user can edit any other user's post.</p>
+                        <p>
+                          This is an example of
+                          <strong>Broken Access Control</strong>. It's really bad if a website is
+                          missing access control.
+                        </p>
+                        <p class="mb-0">
+                          In real applications, authorization must always be enforced on the server
+                          side.
+                        </p>
+                      </div>
+                    }
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         }
         @default {

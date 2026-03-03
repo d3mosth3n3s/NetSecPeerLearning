@@ -36,10 +36,10 @@ export class PlaygroundComponent {
       map(response => response.data.value)
     )
   }
- /* ---------- Missing Authorization ---------- */
+
 
  getStoredValue2() {
-    this.savedValue$ = this.goodService.getXSSValue('user-input').pipe(
+    this.savedValue$ = this.goodService.getGoodXSSValue('user-input').pipe(
       map(response => response.data.value)
     )
   }
