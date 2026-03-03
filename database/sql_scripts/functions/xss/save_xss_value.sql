@@ -15,4 +15,3 @@ BEGIN
     RETURNING xssvalues.id, xssvalues.value;
 END;
 $$ LANGUAGE plpgsql;
- 

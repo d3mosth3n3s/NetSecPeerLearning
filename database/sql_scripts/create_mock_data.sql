@@ -6,3 +6,10 @@ INSERT INTO vulnerabilities (id, title, name, description, link) VALUES
     ('Unrestricted-File-Upload-With-Dangerous-Type', 'Unrestricted File Upload With Dangerous Type', 'Unrestricted File Upload With Dangerous Type', 'Allows malicious users to upload dangerous file types due to no or improper file input validation', 'https://cwe.mitre.org/data/definitions/434.html'),
     ('Missing-Authorization', 'Missing Authorization', 'Missing Authorization', 'Access resources or perform actions without proper permission checks.', 'https://cwe.mitre.org/data/definitions/862.html')
 ON CONFLICT (id) DO NOTHING;
+
+
+-- Insert mock users for SQL injection demo
+INSERT INTO users (username, password) VALUES
+    ('admin', 'password'),
+    ('john', 'john')
+ON CONFLICT (username) DO NOTHING;

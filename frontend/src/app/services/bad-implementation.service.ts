@@ -9,7 +9,7 @@ export class BadImplementationService {
   private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
-  
+
   public badFileUploadCheck(fileInput: File): Observable<any> {
     const formData = new FormData()
     formData.append('file', fileInput)
@@ -19,5 +19,16 @@ export class BadImplementationService {
   public badGetFile(id: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/ufu/bad/${id}`, { responseType: 'blob' });
   }
-}
 
+  public saveBadXSSValue(badInput: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/xss/bad`, { value: badInput });
+  }
+
+  public getBadXSSValue(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/xss/bad/${id}`);
+  }
+
+  public getBadSQLValue(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sql/bad`, { username, password });
+  }
+}

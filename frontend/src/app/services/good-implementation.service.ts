@@ -10,11 +10,11 @@ export class GoodImplementationService {
 
   constructor(private http: HttpClient) {}
 
-  public saveXSSValue(goodInput: string): Observable<any> {
+  public saveGoodXSSValue(goodInput: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/xss/good`, { value: goodInput });
   }
 
-  public getXSSValue(id: string): Observable<any> {
+  public getGoodXSSValue(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/xss/good/${id}`);
   }
 
@@ -27,5 +27,8 @@ export class GoodImplementationService {
   public goodGetFile(id: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/ufu/good/${id}`, { responseType: 'blob' });
   }
+
+  public getGoodSQLValue(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sql/good`, { username, password });
+  }
 }
- 
