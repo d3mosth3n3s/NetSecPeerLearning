@@ -7,10 +7,12 @@ import { BadImplementationService } from '../../services/bad-implementation.serv
 import { VulnerabilityService } from '../../services/vulnerability.service';
 import { Observable, of } from 'rxjs';
 import { map, take, switchMap, catchError } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-playground',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './playground.component.html',
   styleUrl: './playground.component.css',
 })
@@ -34,6 +36,14 @@ export class PlaygroundComponent {
       map(response => response.data.value)
     )
   }
+
+
+ getStoredValue2() {
+    this.savedValue$ = this.goodService.getGoodXSSValue('user-input').pipe(
+      map(response => response.data.value)
+    )
+  }
+  
 
   getBadXSSValue() {
     this.badSavedValue$ = this.badService.getBadXSSValue('user-input-bad').pipe(
